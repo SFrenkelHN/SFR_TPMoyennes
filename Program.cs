@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TPMoyennes;
 
 namespace TPMoyennes
 {
@@ -8,6 +9,7 @@ namespace TPMoyennes
     {
         static void Main(string[] args)
         {
+
             // Création d'une classe
             Classe sixiemeA = new Classe("6eme A");
             // Ajout des élèves à la classe
@@ -33,8 +35,11 @@ namespace TPMoyennes
                 {
                     for (int i = 0; i < 5; i++)
                     {
-                        sixiemeA.eleves[ieleve].ajouterNote(new Note(matiere, (float)((6.5 +
-                       random.NextDouble() * 34)) / 2.0f));
+                        // Modification pour test la classe Eleve...
+                        Note nouvelleNote = new Note(matiere, (float)((6.5 + random.NextDouble() * 34)) / 2.0f);
+                        sixiemeA.eleves[ieleve].ajouterNote(nouvelleNote.matiere, nouvelleNote.note);
+                        //Code d"origine
+                        //sixiemeA.eleves[ieleve].ajouterNote(new Note(matiere, (float)((6.5 + random.NextDouble() * 34)) / 2.0f));
                         // Note minimale = 3
                     }
                 }
@@ -43,14 +48,14 @@ namespace TPMoyennes
             Eleve eleve = sixiemeA.eleves[6];
             // Afficher la moyenne d'un élève dans une matière
             Console.Write(eleve.prenom + " " + eleve.nom + ", Moyenne en " + sixiemeA.matieres[1] + " : " +
-            eleve.Moyenne(1) + "\n");
+            Math.Round(eleve.Moyenne(1), 2) + "\n");
             // Afficher la moyenne générale du même élève
-            Console.Write(eleve.prenom + " " + eleve.nom + ", Moyenne Generale : " + eleve.Moyenne() + "\n");
+            Console.Write(eleve.prenom + " " + eleve.nom + ", Moyenne Generale : " + Math.Round(eleve.Moyenne(), 2) + "\n");
             // Afficher la moyenne de la classe dans une matière
             Console.Write("Classe de " + sixiemeA.nomClasse + ", Moyenne en " + sixiemeA.matieres[1] + " : " +
-            sixiemeA.Moyenne(1) + "\n");
+            Math.Round(sixiemeA.Moyenne(1), 2) + "\n");
             // Afficher la moyenne générale de la classe
-            Console.Write("Classe de " + sixiemeA.nomClasse + ", Moyenne Generale : " + sixiemeA.Moyenne() + "\n");
+            Console.Write("Classe de " + sixiemeA.nomClasse + ", Moyenne Generale : " + Math.Round(sixiemeA.Moyenne(), 2) + "\n");
             Console.Read();
         }
     }
